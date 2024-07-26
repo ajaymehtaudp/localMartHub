@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { fetchShopDetails } from '../APIServices/api';
+import shopsData from '../APIServices/mockData/shops';
 
 interface Shop {
   id: number;
@@ -18,9 +19,11 @@ const ShopDetails: React.FC = () => {
   const [shop, setShop] = useState<Shop | null>(null);
 
   useEffect(() => {
-    fetchShopDetails(Number(id))
-      .then(response => setShop(response.data))
-      .catch(error => console.error('Error fetching shop details:', error));
+    const shop = shopsData[0];
+    setShop(shop);
+    // fetchShopDetails(Number(id))
+    //   .then(response => setShop(response.data))
+    //   .catch(error => console.error('Error fetching shop details:', error));
   }, [id]);
 
   if (!shop) {
